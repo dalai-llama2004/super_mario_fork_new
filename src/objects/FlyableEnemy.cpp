@@ -33,11 +33,8 @@ void FlyableEnemy::process_horizontal_static_collision(Rect* obj) noexcept {
 }
 
 void FlyableEnemy::process_mario_collision(Collisionable* mario) noexcept {
-	if (mario->get_speed().v > 0 && mario->get_speed().v != V_ACCELERATION) {
-		kill();
-	} else {
-		mario->kill();
-	}
+	// FlyableEnemy can be killed from any direction
+	kill();
 }
 
 void FlyableEnemy::process_vertical_static_collision(Rect* obj) noexcept {

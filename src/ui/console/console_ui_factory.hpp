@@ -1,7 +1,6 @@
 #pragma once
 
 #include "console_box.hpp"
-#include "console_enemy.hpp"
 #include "console_movable_enemy.hpp"
 #include "console_flyable_enemy.hpp"
 #include "console_jumpable_enemy.hpp"
@@ -20,7 +19,6 @@ namespace biv {
 			std::vector<ConsoleFullBox*> full_boxes;
 			std::vector<ConsoleShip*> ships;
 			ConsoleMario* mario = nullptr;
-			std::vector<ConsoleEnemy*> enemies;
 			std::vector<ConsoleMovableEnemy*> movable_enemies;
 			std::vector<ConsoleFlyableEnemy*> flyable_enemies;
 			std::vector<ConsoleJumpableEnemy*> jumpable_enemies;
@@ -31,9 +29,6 @@ namespace biv {
 			
 			void clear_data() override;
 			void create_box(
-				const Coord& top_left, const int width, const int height
-			) override;
-			void create_enemy(
 				const Coord& top_left, const int width, const int height
 			) override;
 			void create_movable_enemy(

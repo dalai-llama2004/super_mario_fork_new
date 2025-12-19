@@ -15,6 +15,9 @@ void ConsoleUIFactory::clear_data() {
 	full_boxes.clear();
 	ships.clear();
 	enemies.clear();
+	movable_enemies.clear();
+	flyable_enemies.clear();
+	jumpable_enemies.clear();
 	moneys.clear();
 }
 
@@ -33,6 +36,39 @@ void ConsoleUIFactory::create_enemy(
 ) {
 	ConsoleEnemy* enemy = new ConsoleEnemy(top_left, width, height);
 	enemies.push_back(enemy);
+	game->add_map_movable(enemy);
+	game->add_movable(enemy);
+	game->add_collisionable(enemy);
+	game_map->add_obj(enemy);
+}
+
+void ConsoleUIFactory::create_movable_enemy(
+	const Coord& top_left, const int width, const int height
+) {
+	ConsoleMovableEnemy* enemy = new ConsoleMovableEnemy(top_left, width, height);
+	movable_enemies.push_back(enemy);
+	game->add_map_movable(enemy);
+	game->add_movable(enemy);
+	game->add_collisionable(enemy);
+	game_map->add_obj(enemy);
+}
+
+void ConsoleUIFactory::create_flyable_enemy(
+	const Coord& top_left, const int width, const int height
+) {
+	ConsoleFlyableEnemy* enemy = new ConsoleFlyableEnemy(top_left, width, height);
+	flyable_enemies.push_back(enemy);
+	game->add_map_movable(enemy);
+	game->add_movable(enemy);
+	game->add_collisionable(enemy);
+	game_map->add_obj(enemy);
+}
+
+void ConsoleUIFactory::create_jumpable_enemy(
+	const Coord& top_left, const int width, const int height
+) {
+	ConsoleJumpableEnemy* enemy = new ConsoleJumpableEnemy(top_left, width, height);
+	jumpable_enemies.push_back(enemy);
 	game->add_map_movable(enemy);
 	game->add_movable(enemy);
 	game->add_collisionable(enemy);

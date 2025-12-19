@@ -19,6 +19,14 @@ biv::Speed JumpableEnemy::get_speed() const noexcept {
 	return {vspeed, hspeed};
 }
 
+void JumpableEnemy::move_vertically() noexcept {
+	// Apply gravity and move vertically
+	if (vspeed < MAX_V_SPEED) {
+		vspeed += V_ACCELERATION;
+	}
+	top_left.y += vspeed;
+}
+
 void JumpableEnemy::process_horizontal_static_collision(Rect* obj) noexcept {
 	// No horizontal movement for jumping enemies
 }
@@ -36,10 +44,9 @@ void JumpableEnemy::process_vertical_static_collision(Rect* obj) noexcept {
 	if (vspeed > 0) {
 		top_left.y -= vspeed;
 		vspeed = 0;
+		// Update jump timer only when grounded
+		update_jump();
 	}
-	
-	// Update jump timer and jump when ready
-	update_jump();
 }
 
 void JumpableEnemy::update_jump() noexcept {

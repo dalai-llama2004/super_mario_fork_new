@@ -21,6 +21,12 @@ biv::Speed FlyableEnemy::get_speed() const noexcept {
 	return {vspeed, hspeed};
 }
 
+void FlyableEnemy::move_vertically() noexcept {
+	// Flying enemies maintain constant height - no vertical movement
+	top_left.y = base_y - FLIGHT_HEIGHT;
+	vspeed = 0;
+}
+
 void FlyableEnemy::process_horizontal_static_collision(Rect* obj) noexcept {
 	hspeed = -hspeed;
 	move_horizontally();
@@ -35,15 +41,11 @@ void FlyableEnemy::process_mario_collision(Collisionable* mario) noexcept {
 }
 
 void FlyableEnemy::process_vertical_static_collision(Rect* obj) noexcept {
-	// Flying enemies maintain fixed height, so they check edges similar to MovableEnemy
+	// Flying enemies check edges similar to MovableEnemy
 	top_left.x += hspeed;
 	if (!has_collision(obj)) {
 		process_horizontal_static_collision(obj);
 	} else {
 		top_left.x -= hspeed;
 	}
-	
-	// Maintain flight height above the block
-	top_left.y = base_y - FLIGHT_HEIGHT;
-	vspeed = 0;
 }

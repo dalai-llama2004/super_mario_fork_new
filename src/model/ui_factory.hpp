@@ -16,8 +16,6 @@ namespace biv {
 			virtual void clear_data() = 0;
 			virtual void create_box(
 				const Coord& top_left, const int width, const int height) = 0;
-			virtual void create_enemy(
-				const Coord& top_left, const int width, const int height) = 0;
 			virtual void create_movable_enemy(
 				const Coord& top_left, const int width, const int height) = 0;
 			virtual void create_flyable_enemy(

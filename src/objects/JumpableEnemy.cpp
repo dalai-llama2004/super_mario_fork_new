@@ -44,7 +44,10 @@ void JumpableEnemy::process_vertical_static_collision(Rect* obj) noexcept {
 	if (vspeed > 0) {
 		top_left.y -= vspeed;
 		vspeed = 0;
-		// Update jump timer only when grounded
+	}
+	
+	// Update jump timer every frame when grounded (vspeed == 0)
+	if (vspeed == 0) {
 		update_jump();
 	}
 }
